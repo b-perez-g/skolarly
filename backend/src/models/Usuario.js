@@ -1,10 +1,10 @@
 const {Schema, model, default: mongoose} =require('mongoose')
 
-const usuarioSchema = new Schema = ({
-    rut: {type: String, required: true},
-    contrasena: {type: String, required: true},
-    tipo_usuario: {type: String, required: true},
-    nombre : {
+const usuarioSchema = new Schema ({
+    rut: String,
+    contrasena: String,
+    tipo_usuario: String,
+    nombre:{
         nombres: String,
         a_paterno: String,
         a_materno: String
@@ -15,17 +15,22 @@ const usuarioSchema = new Schema = ({
     fono: Number,
     celular: Number,
     estado_civil: Number,
-    escuela_id: {type: mongoose.Schema.Types.ObjectId, ref:'Escuelas'},
-    direccion: {
+    escuela_id:{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Escuela'
+    },
+    direccion:{
         calle: String,
         numero: String,
         comuna: String,
         region: String
     },
-    curso_id: {type: mongoose.Schema.Types.ObjectId, ref:'Cursos'},
-},{
+    curso_id:{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Curso'
+    }
+}, {
     timestamps: true
 })
 
-module.exports = model('Usuario', usuarioSchema)
-
+module.exports = model('Usuario', usuarioSchema, 'Usuarios')

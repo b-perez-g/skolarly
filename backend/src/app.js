@@ -15,4 +15,7 @@ app.get('/', (req, res)=>{
     res.send('Conectado a la API');
 })
 
+//Rutas
+app.use('/api/usuarios', require('./routes/usuario'))
+
 module.exports = app;
