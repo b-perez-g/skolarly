@@ -4,8 +4,8 @@ const Usuario = require('../models/Usuario')
 // Crear nuevo usuario
 usuarioCtrl.createUsuario = async (req, res) => {
   try {
-    const nuevoUsuario = new Usuario(req.body);
-    const usuarioGuardado = await nuevoUsuario.save();
+    const usuarioNuevo = new Usuario(req.body);
+    const usuarioGuardado = await usuarioNuevo.save();
     res.status(201).json(usuarioGuardado);
   } catch (error) {
     res.status(500).json({ error: 'Error al crear el usuario' });
