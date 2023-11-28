@@ -35,6 +35,19 @@ usuarioCtrl.getUsuarioById = async (req, res) => {
   }
 }
 
+// Obtener un usuario por su rut
+usuarioCtrl.getUsuarioByRut = async (req, res) => {
+  try {
+    const usuario = await Usuario.findOne({ rut: req.params.rut });
+    if (!usuario) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    res.status(200).json(usuario);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el usuario' });
+  }
+}
+
 // Actualizar un usuario por su ID
 usuarioCtrl.updateUsuario = async (req, res) => {
   try {

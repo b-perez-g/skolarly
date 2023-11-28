@@ -17,7 +17,7 @@ const actividadSchema = new Schema({
     }],
     cursos_asignados:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: Curso
+        ref: 'Curso'
     }]
 }, {
     timestamps: true

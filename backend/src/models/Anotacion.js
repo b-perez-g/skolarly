@@ -3,11 +3,11 @@ const {Schema, model, default: mongoose} =require('mongoose')
 const anotacionSchema = new Schema ({
     alumno_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: Usuario
+        ref: 'Usuario'
     },
     profesor_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: Usuario
+        ref: 'Usuario'
     },
     tipo: String,
     contenido: String
@@ -15,4 +15,4 @@ const anotacionSchema = new Schema ({
     timestamps: true
 })
 
-module.exports = model ('Anotacion', usuarioSchema, 'Anotaciones')
+module.exports = model ('Anotacion', anotacionSchema, 'Anotaciones')

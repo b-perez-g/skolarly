@@ -1,5 +1,5 @@
-const anotacionCtrl = {}
 const Anotacion = require('../models/Anotacion')
+const anotacionCtrl = {}
 
 // Crear nueva anotacion
 anotacionCtrl.createAnotacion = async (req, res) => {
