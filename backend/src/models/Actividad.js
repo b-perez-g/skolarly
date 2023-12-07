@@ -1,4 +1,5 @@
 const {Schema, model, default: mongoose, mongo} = require ('mongoose')
+const moment = require('moment-timezone');
 
 const actividadSchema = new Schema({
     titulo: String,
@@ -18,9 +19,15 @@ const actividadSchema = new Schema({
     cursos_asignados:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Curso'
-    }]
-}, {
-    timestamps: true
+    }],
+    createdAt: {
+        type: String,
+        default: moment().tz('America/Santiago').format()
+    },
+    updatedAt:{
+        type: String,
+        default: moment().tz('America/Santiago').format()
+    }
 })
 
 module.exports = model('Actividad', actividadSchema, 'Actividades')

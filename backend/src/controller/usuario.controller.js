@@ -48,6 +48,32 @@ usuarioCtrl.getUsuarioByRut = async (req, res) => {
   }
 }
 
+// Obtener alumnos por rut del apoderado
+usuarioCtrl.getUsuarioByRutApoderado = async (req, res) => {
+  try {
+    const usuarios = await Usuario.find({ rut_apoderado: req.params.rut });
+    if (!usuarios) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    res.status(200).json(usuarios);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el usuario' });
+  }
+}
+
+// Obtener alumnos por curso
+usuarioCtrl.getUsuarioByCurso = async (req, res) => {
+  try {
+    const usuarios = await Usuario.find({ curso_id: req.params.id_curso });
+    if (!usuarios) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    res.status(200).json(usuarios);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el usuario' });
+  }
+}
+
 // Actualizar un usuario por su ID
 usuarioCtrl.updateUsuario = async (req, res) => {
   try {

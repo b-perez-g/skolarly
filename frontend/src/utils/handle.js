@@ -9,19 +9,24 @@ export const toggleVisibility = (value) => {
  * Maneja longitud y caracteres del rut
  */
 export const handleRut = (e) => {
-    let inputValue = e.target.value;
-    //eliminar caracteres no numéricos
-    inputValue = inputValue.replace(/\D/g, '');
-    // Limitar la longitud del rut
-    if (inputValue.length > 9) {
-      inputValue = inputValue.slice(0, 9);
-    }
-    // guion antes del último número
-    if (inputValue.length > 1) {
-      inputValue = inputValue.slice(0, -1) + '-' + inputValue.slice(-1);
-    }
-    return inputValue;
-  };
+  let inputValue = e.target.value;
+  // Permitir solo dígitos y la letra 'K' (mayúscula o minúscula)
+  inputValue = inputValue.replace(/[^0-9kK]/g, '');
+  // Limitar la longitud del rut
+  if (inputValue.length > 9) {
+    inputValue = inputValue.slice(0, 9);
+  }
+  // Guion antes del último número
+  if (inputValue.length > 1) {
+    inputValue = inputValue.slice(0, -1) + '-' + inputValue.slice(-1);
+  }
+  // Convertir la 'k' (minúscula o mayúscula) a 'K' mayúscula
+  inputValue = inputValue.replace(/k$/, 'K');
+  return inputValue;
+};
+
+
+
 
 /**
  * Maneja longitud y caracteres de la contraseña de ingreso

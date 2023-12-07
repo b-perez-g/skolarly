@@ -1,4 +1,5 @@
 const {Schema, model, default: mongoose} =require('mongoose')
+const moment = require('moment-timezone');
 
 const calificacionSchema = new Schema ({
     nota: Number,
@@ -9,9 +10,15 @@ const calificacionSchema = new Schema ({
     asignarura_id:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Asignatura'
+    },
+    createdAt: {
+        type: String,
+        default: moment().tz('America/Santiago').format()
+    },
+    updatedAt:{
+        type: String,
+        default: moment().tz('America/Santiago').format()
     }
-},{
-    timestamps: true
 })
 
 module.exports = model('Calificacion', calificacionSchema, 'Calificaciones')

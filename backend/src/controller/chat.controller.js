@@ -23,7 +23,46 @@ chatCtrl.getChats = async (req, res) => {
 }
 
 // Obtener un chat por su ID
+// Obtener un chat por participantes
+chatCtrl.getChatByParticipants = async (req, res) => {
+  //try {
+
+    console.log(req.params);
+  
+/*
+    const chat = await Chat.findOne({
+      'participantes': {
+        $all: [
+          mongoose.Types.ObjectId(user1),
+          mongoose.Types.ObjectId(user2)
+        ]
+      }
+    });
+
+    if (!chat) {
+      return res.status(404).json({ error: 'Chat no encontrado' });
+    }
+
+    res.status(200).json(chat);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el chat' });
+  }*/
+};
+
+
 chatCtrl.getChatById = async (req, res) => {
+  try {
+    const chat = await Chat.findById(req.params.id);
+    if (!chat) {
+      return res.status(404).json({ error: 'Chat no encontrado' });
+    }
+    res.status(200).json(chat);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el chat' });
+  }
+}
+
+chatCtrl.getChatByUsers = async (req, res) => {
   try {
     const chat = await Chat.findById(req.params.id);
     if (!chat) {

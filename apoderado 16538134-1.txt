@@ -1,0 +1,7 @@
+apoderado: 16538134-1
+
+hijo1: 23219509-4 
+hijo2: 22406189-3
+
+profesor1: 18215523-K
+profesor2: 18559529-7

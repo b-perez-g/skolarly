@@ -12,6 +12,7 @@ import { Input, Button } from "@nextui-org/react";
 //Utils
 import { toggleVisibility, handleRut, handleInputPassword } from "@/utils/handle";
 import { validarLogin, consultarCookie } from "@/utils/validarLogin";
+import { Spinner } from "@nextui-org/react";
 
 import LoadingGif from "./LoadingGIF";
 
@@ -24,31 +25,42 @@ function LoginForm() {
   const [isVisible, setIsVisible] = useState(false);
   const [rut, setRut] = useState('');
   const [inputPassword, setInputPassword] = useState('');
+  const [verificando, setVerificando] = useState(false);
+  const [lblError, setLblError] = useState(false);
 
   useEffect(() => {
     const usuarioLogueado = async () => {
       const datosCookie = await consultarCookie();
       setUser(datosCookie);
+      if(datosCookie.RUT){
+        router.push(`/${datosCookie.TIPO}`);
+      }else{
+        setLoading(false);
+      }
     }
     usuarioLogueado();
   }, [])
 
-  useEffect(() => {
-    if (user.RUT) {
-      router.push('/skolarly');
-    } else {
-      setLoading(false);
-    }
-  }, [user]);
+
+  useEffect(() => {}, [loading]);
 
   if (!loading) {
     return (
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          const autenticado = await validarLogin(rut, inputPassword);
-          if (autenticado) {
-            router.push('/skolarly');
+          setLblError(false);
+          setVerificando(true);
+          const autenticacion = await validarLogin(rut, inputPassword);
+          if (autenticacion.validado) {
+            router.push(`/${autenticacion.tipo_usuario}`);
+          } else {
+            const timeoutId = setTimeout(() => {
+              setVerificando(false);
+              setLblError(true);
+            }, 700);
+            return () => clearTimeout(timeoutId);
+
           }
         }}
         className="mt-5 lg:col-start-2 lg:col-end-4 lg:flex lg:justify-center lg:items-center" >
@@ -63,8 +75,10 @@ function LoginForm() {
             label="Rut"
             value={rut}
             placeholder="Ingresa tu Rut (xxxxxxxx-x)"
-            onChange={(e) =>
-              setRut(handleRut(e))
+            onChange={(e) => {
+              setRut(handleRut(e));
+              setLblError(false);
+            }
             }
           />
 
@@ -77,6 +91,7 @@ function LoginForm() {
             value={inputPassword}
             onChange={(e) => {
               const result = handleInputPassword(e);
+              setLblError(false);
               if (result !== null) setInputPassword(result);
             }}
             endContent={
@@ -96,10 +111,13 @@ function LoginForm() {
               <small >¿Olvidaste tu contraseña?</small>
             </Link>
           </div>
-          <Button type="submit" className="bg-blue-900 text-white w-full mb-4">
-            Ingresar
-          </Button>
-
+          <div>
+            <Button type="submit" className="bg-blue-900 text-white w-full mb-4">
+              Ingresar
+            </Button>
+            {verificando ? <Spinner color="primary" className="w-full mb-4" /> : null}
+            {lblError ? <p className="text-red-500 text-center">Credenciales incorrectas.</p> : null}
+          </div>
         </div>
       </form>
     )

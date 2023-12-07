@@ -1,4 +1,5 @@
 const {Schema, model, default: mongoose} =require('mongoose')
+const moment = require('moment-timezone');
 
 const asistenciaSchema = new Schema ({
     alumno_id:{
@@ -10,9 +11,19 @@ const asistenciaSchema = new Schema ({
         ref: 'Usuario'
     },
     asiste: Boolean,
-    observaciones: String
-},{
-    timestamps: true
+    observaciones: {
+        type:String,
+        default:"Alumno asiste."
+    },
+    createdAt: {
+        type: String,
+        default: moment().tz('America/Santiago').format()
+    },
+    updatedAt:{
+        type: String,
+        default: moment().tz('America/Santiago').format()
+    }
+    
 })
 
 module.exports = model('Asistencia', asistenciaSchema, 'Asistencia')

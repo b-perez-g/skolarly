@@ -1,4 +1,5 @@
 const {Schema, model, default: mongoose} =require('mongoose')
+const moment = require('moment-timezone');
 
 const anotacionSchema = new Schema ({
     alumno_id: {
@@ -10,9 +11,15 @@ const anotacionSchema = new Schema ({
         ref: 'Usuario'
     },
     tipo: String,
-    contenido: String
-}, {
-    timestamps: true
+    contenido: String,
+    createdAt: {
+        type: String,
+        default: moment().tz('America/Santiago').format()
+    },
+    updatedAt:{
+        type: String,
+        default: moment().tz('America/Santiago').format()
+    }
 })
 
 module.exports = model ('Anotacion', anotacionSchema, 'Anotaciones')

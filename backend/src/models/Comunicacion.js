@@ -1,4 +1,5 @@
 const {Schema, model, default: mongoose} =require('mongoose')
+const moment = require('moment-timezone');
 
 const comunicacionSchema = new Schema ({
     tipo: String,
@@ -15,7 +16,13 @@ const comunicacionSchema = new Schema ({
     archivos_adjuntos: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ArchivoAdjunto'
-    }]
-},{
-    timestamps: true
+    }],
+    createdAt: {
+        type: String,
+        default: moment().tz('America/Santiago').format()
+    },
+    updatedAt:{
+        type: String,
+        default: moment().tz('America/Santiago').format()
+    }
 })

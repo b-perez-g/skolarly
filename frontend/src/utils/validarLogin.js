@@ -1,5 +1,4 @@
 export const validarLogin = async (rut, contrasena) => {
-    let validado = false;
     let user = {};
 
     try {
@@ -25,9 +24,9 @@ export const validarLogin = async (rut, contrasena) => {
 
                     //SI EL TOKEN FUE CREADO
                     if (response.ok) {
-                        validado = true;
                         //Crear Cookie
                         document.cookie = `user=${data.token}; path=/`
+                        user.validado = "Si"
 
                         //SI NO SE GENERA TOKEN
                     } else {
@@ -35,25 +34,25 @@ export const validarLogin = async (rut, contrasena) => {
                     }
                 } catch (error) {
                     console.error('Error al crear el token', error);
-                    return validado;
+                    return user;
                 }
 
                 //SI LOS INPUTS SON INCORRECTOS
             } else {
                 console.log("Rut o contraseña incorrecta");
-                return validado;
+                return user;
             }
 
             // SI NO HAY RESPUESTA DEL USUARIO
         } else {
-            return validado;
+            return user;
         }
 
     } catch (error) {
         console.error('Error al obtener el usuario', error);
-        return validado;
+        return user;
     };
-    return validado;
+    return user;
 }
 
 export const consultarCookie = async () => {
@@ -92,4 +91,10 @@ export const consultarCookie = async () => {
     //if (userData && Object.keys(userData).length > 0){
         
     //}
+}
+
+export const cerrarSesion = () => {
+    var currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() - 1);
+    document.cookie = "user=; expires=" + currentDate.toUTCString() + "; path=/;";
 }
