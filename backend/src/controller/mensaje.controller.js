@@ -12,6 +12,25 @@ mensajeCtrl.createMensaje = async (req, res) => {
   }
 }
 
+
+mensajeCtrl.getUltimoMensajePorChat = async (req, res) => {
+  try {
+    const { id_chat } = req.params;
+
+    // Asumiendo que existe un campo 'id_chat' en tu esquema de mensajes
+    const ultimoMensaje = await Mensaje.findOne({chat_id: id_chat }).sort({ _id: -1 });
+
+    if (ultimoMensaje) {
+      res.status(200).json(ultimoMensaje);
+    } else {
+      res.status(404).json({ mensaje: 'No se encontraron mensajes para el chat especificado' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el último mensaje' });
+  }
+};
+
+
 // Obtener todos los mensajes
 mensajeCtrl.getMensajes = async (req, res) => {
   try {
@@ -34,6 +53,25 @@ mensajeCtrl.getMensajeById = async (req, res) => {
     res.status(500).json({ error: 'Error al obtener el mensaje' });
   }
 }
+
+mensajeCtrl.getMensajesByChatId = async (req, res) => {
+  try {
+    const chatId = req.params.id_chat;
+
+    // Obtener todos los mensajes por chat_id y ordenar por fecha
+    const mensajes = await Mensaje.find({ chat_id: chatId }).sort({ _id: 1 });
+
+    if (!mensajes || mensajes.length === 0) {
+      return res.status(404).json({ error: 'No se encontraron mensajes para el chat especificado' });
+    }
+
+    res.status(200).json(mensajes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener los mensajes' });
+  }
+};
+
 
 // Actualizar un mensaje por su ID
 mensajeCtrl.updateMensaje = async (req, res) => {

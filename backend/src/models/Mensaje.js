@@ -10,6 +10,10 @@ const mensajeSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario'
     },
+    destinatario_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Usuario'
+    },
     contenido: String,
     leido:{
         type: Boolean,
@@ -21,11 +25,11 @@ const mensajeSchema = new Schema({
     }],
     createdAt: {
         type: String,
-        default: moment().tz('America/Santiago').format()
+        default: () => moment().tz('America/Santiago').format()
     },
     updatedAt:{
         type: String,
-        default: moment().tz('America/Santiago').format()
+        default: () => moment().tz('America/Santiago').format()
     }
 })
 

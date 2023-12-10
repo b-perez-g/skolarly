@@ -35,7 +35,7 @@ function Page({params}) {
       <Divider orientation="horizontal" />
       <div className='grid grid-cols-5 gap-0'>
         <div className='col-span-2 border-l border-b'>
-        <ChatList tipoUser ={params.tipo_usuario} cambiarChat={cambiarChat} obtenerUsuario={obtenerUsuario}/>
+        <ChatList tipoUser ={params.tipo_usuario} cambiarChat={cambiarChat} obtenerUsuario={obtenerUsuario} chat={chatSelected}/>
         </div>
         <div className='col-span-3 border-l border-r border-b'>
         <Chat tipoUser ={params.tipo_usuario} chat={chatSelected} />

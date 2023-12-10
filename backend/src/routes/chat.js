@@ -1,19 +1,22 @@
 const {Router} = require('express')
 const router = Router();
 
-const {getChats, createChat, getChatById, deleteChat, updateChat, getChatByUsers} = require('../controller/chat.controller')
+const {getChats, createChat, getChatById, deleteChat, updateChat, getChatByParticipantes, getChatsByUserId, updateChatVisto} = require('../controller/chat.controller')
 
 router.route('/')
     .get(getChats)
     .post(createChat)
 
 router.route('/:id')
-    .get(getChatById)
     .delete(deleteChat)
-    .put(updateChat)
+    .patch(updateChat)
+    .get(getChatsByUserId)
 
-router.route('/:user1/:user2')
-    .get(getChatByUsers)
+router.route('/visto/:visto')
+    .patch(updateChatVisto)
+
+router.route('/:participante1/:participante2')
+    .get(getChatByParticipantes)
 
 
 module.exports = router;

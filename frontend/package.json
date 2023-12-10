@@ -12,6 +12,8 @@
     "@headlessui/react": "^1.7.17",
     "@nextui-org/react": "^2.2.9",
     "framer-motion": "^10.16.5",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "next": "14.0.3",
     "next-auth": "^4.24.5",
     "react": "^18",
