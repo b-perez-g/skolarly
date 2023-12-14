@@ -1,7 +1,22 @@
 const Anotacion = require('../models/Anotacion')
 const anotacionCtrl = {}
 
-// Crear nueva anotacion
+anotacionCtrl.getAnotacionesByAlumnoId = async (req, res) => {
+  try {
+    const alumnoId = req.params.alumnoId;
+
+    const anotaciones = await Anotacion.find({ alumno_id: alumnoId }).sort({ createdAt: -1 });
+
+    if (!anotaciones || anotaciones.length === 0) {
+      return res.status(404).json({ error: 'No se encontraron anotaciones para el alumno con ID ' + alumnoId });
+    }
+
+    res.status(200).json(anotaciones);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener las anotaciones' });
+  }
+};
+
 anotacionCtrl.createAnotacion = async (req, res) => {
   try {
     const anotacionNueva = new Anotacion(req.body);

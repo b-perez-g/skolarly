@@ -1,7 +1,7 @@
 'use client'
 import { cerrarSesion } from "@/utils/validarLogin";
 import React from "react";
-import { Link } from "@nextui-org/react";
+import  Link  from "next/link";
 
 //Iconos
 import { GiHamburgerMenu } from "react-icons/gi";

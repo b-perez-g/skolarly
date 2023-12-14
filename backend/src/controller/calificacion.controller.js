@@ -1,6 +1,32 @@
 const calificacionCtrl = {}
 const Calificacion = require('../models/Calificacion')
 
+
+
+calificacionCtrl.getCalificacionByAlumnoAndAsignatura = async (req, res) => {
+  try {
+    const { alumno_id, asignatura_id } = req.params;
+
+
+    if (!alumno_id || !asignatura_id) {
+      return res.status(400).json({ error: 'Se requieren ambos parámetros: alumno_id y asignatura_id' });
+    }
+
+
+    const query = { alumno_id, asignatura_id };
+
+    const calificaciones = await Calificacion.find(query);
+
+    if (!calificaciones || calificaciones.length === 0) {
+      return res.status(404).json({ error: 'Calificaciones no encontradas' });
+    }
+
+    res.status(200).json(calificaciones);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener las calificaciones' });
+  }
+};
+
 // Crear nueva calificacion
 calificacionCtrl.createCalificacion = async (req, res) => {
   try {

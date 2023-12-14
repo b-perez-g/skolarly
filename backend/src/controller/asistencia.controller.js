@@ -1,6 +1,23 @@
 const asistenciaCtrl = {}
 const Asistencia = require('../models/Asistencia')
 
+//asistencias del alumno
+asistenciaCtrl.getAsistenciasByAlumnoId = async (req, res) => {
+  try {
+    const alumnoId = req.params.alumnoId;
+
+    const asistencias = await Asistencia.find({ alumno_id: alumnoId }).sort({ createdAt: -1 });
+
+    if (!asistencias || asistencias.length === 0) {
+      return res.status(404).json({ error: 'No se encontraron asistencias para el alumno con ID ' + alumnoId });
+    }
+
+    res.status(200).json(asistencias);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener las asistencias' });
+  }
+};
+
 // Crear nueva asistencia
 asistenciaCtrl.createAsistencia = async (req, res) => {
   try {

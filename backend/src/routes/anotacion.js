@@ -1,7 +1,7 @@
 const {Router} = require('express')
 const router = Router();
 
-const {getAnotaciones, createAnotacion, getAnotacionById, deleteAnotacion, updateAnotacion} = require('../controller/anotacion.controller')
+const {getAnotaciones, createAnotacion, getAnotacionById, deleteAnotacion, updateAnotacion, getAnotacionesByAlumnoId} = require('../controller/anotacion.controller')
 
 router.route('/')
     .get(getAnotaciones)
@@ -11,5 +11,8 @@ router.route('/:id')
     .get(getAnotacionById)
     .delete(deleteAnotacion)
     .put(updateAnotacion)
+
+router.route('/alumno/:alumnoId')
+    .get(getAnotacionesByAlumnoId)
 
 module.exports = router;

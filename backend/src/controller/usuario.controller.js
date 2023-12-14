@@ -65,14 +65,20 @@ usuarioCtrl.getUsuarioByRutApoderado = async (req, res) => {
 usuarioCtrl.getUsuarioByCurso = async (req, res) => {
   try {
     const usuarios = await Usuario.find({ curso_id: req.params.id_curso });
-    if (!usuarios) {
-      return res.status(404).json({ error: 'Usuario no encontrado' });
+
+    // Ordenar alfabéticamente por el campo 'nombres'
+    const usuariosOrdenados = usuarios.sort((a, b) => a.nombre.nombres.localeCompare(b.nombre.nombres));
+
+    if (!usuariosOrdenados || usuariosOrdenados.length === 0) {
+      return res.status(404).json({ error: 'Usuarios no encontrados' });
     }
-    res.status(200).json(usuarios);
+
+    res.status(200).json(usuariosOrdenados);
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener el usuario' });
+    res.status(500).json({ error: 'Error al obtener los usuarios' });
   }
-}
+};
+
 
 // Actualizar un usuario por su ID
 usuarioCtrl.updateUsuario = async (req, res) => {

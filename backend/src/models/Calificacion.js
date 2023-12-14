@@ -7,7 +7,7 @@ const calificacionSchema = new Schema ({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario'
     },
-    asignarura_id:{
+    asignatura_id:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Asignatura'
     },

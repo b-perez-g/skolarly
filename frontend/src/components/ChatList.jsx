@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { Avatar, Divider, Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
+import { Avatar, Divider, Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import { IoSearchSharp } from "react-icons/io5";
 import { consultarCookie } from '@/utils/validarLogin';
 import { buscarRelacionDocente, buscarRelacionApoderado } from '@/utils/buscarChat';

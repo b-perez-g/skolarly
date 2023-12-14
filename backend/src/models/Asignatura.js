@@ -10,6 +10,7 @@ const asignaturaSchema = new Schema ({
     },
     grado: Number,
     descripcion: String,
+    foto:String,
     createdAt: {
         type: String,
         default: moment().tz('America/Santiago').format()
