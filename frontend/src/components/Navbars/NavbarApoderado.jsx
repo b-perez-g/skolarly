@@ -14,6 +14,7 @@ import { RiAdvertisementLine, RiSchoolLine } from "react-icons/ri";
 import { TbMessageReport } from "react-icons/tb";
 import { PiMedalBold } from "react-icons/pi";
 import { FaHandsHelping } from "react-icons/fa";
+import { RiPassValidLine } from "react-icons/ri";
 
 function SideNavbar({tipo_usuario}) {
   return (
@@ -54,7 +55,7 @@ function SideNavbar({tipo_usuario}) {
                 </div>
               </Link>
 
-              <Link href="#">
+              <Link href={`/${tipo_usuario}/comunicaciones`}>
                 <div className="flex  mb-2 justify-start items-center gap-4 pl-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
                   <MdOutlineMail className="text-2xl text-blue-400 group-hover:text-white " />
                   <h3 className="text-base text-blue-100 group-hover:text-white font-semibold ">
@@ -72,11 +73,19 @@ function SideNavbar({tipo_usuario}) {
                 </div>
               </Link>
 
-              <Link href="#">
+              <Link href={`/${tipo_usuario}/calendario`}>
                 <div className="flex  mb-2 justify-start items-center gap-4 pl-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
                   <LuCalendarDays className="text-2xl text-blue-400 group-hover:text-white " />
                   <h3 className="text-base text-blue-100 group-hover:text-white font-semibold ">
                     Calendario
+                  </h3>
+                </div>
+              </Link>
+              <Link href={`/${tipo_usuario}/autorizaciones`}>
+                <div className="flex  mb-2 justify-start items-center gap-4 pl-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
+                  <RiPassValidLine className="text-2xl text-blue-400 group-hover:text-white " />
+                  <h3 className="text-base text-blue-100 group-hover:text-white font-semibold ">
+                    Autorizaciones
                   </h3>
                 </div>
               </Link>
@@ -90,7 +99,7 @@ function SideNavbar({tipo_usuario}) {
                 </div>
               </Link>
 
-              <Link href="#">
+              <Link href={`/${tipo_usuario}/mis-medallas`}>
                 <div className="flex  mb-2 justify-start items-center gap-4 pl-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
                   <PiMedalBold className="text-2xl text-blue-400 group-hover:text-white " />
                   <h3 className="text-base text-blue-100 group-hover:text-white font-semibold ">

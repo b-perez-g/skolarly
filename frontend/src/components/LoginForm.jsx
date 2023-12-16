@@ -33,7 +33,7 @@ function LoginForm() {
       const datosCookie = await consultarCookie();
       setUser(datosCookie);
       if(datosCookie.RUT){
-        router.push(`/${datosCookie.TIPO}`);
+        router.push(`/${datosCookie.TIPO}/${datosCookie.TIPO==="Apoderado" ?"perfil":"chat"}`);
       }else{
         setLoading(false);
       }
@@ -47,22 +47,23 @@ function LoginForm() {
   if (!loading) {
     return (
       <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          setLblError(false);
-          setVerificando(true);
-          const autenticacion = await validarLogin(rut, inputPassword);
+      onSubmit={(e) => {
+        e.preventDefault();
+        setLblError(false);
+        setVerificando(true);
+      
+        validarLogin(rut, inputPassword).then((autenticacion) => {
           if (autenticacion.validado) {
-            router.push(`/${autenticacion.tipo_usuario}`);
+            router.push(`/${autenticacion.tipo_usuario}/${autenticacion.tipo_usuario==="Apoderado" ? "perfil": "chat"}`);
           } else {
             const timeoutId = setTimeout(() => {
               setVerificando(false);
               setLblError(true);
             }, 700);
             return () => clearTimeout(timeoutId);
-
           }
-        }}
+        });
+      }}
         className="mt-5 lg:col-start-2 lg:col-end-4 lg:flex lg:justify-center lg:items-center" >
         <div className="w-[80%] m-auto p-2 lg:w-full">
           <h1 className="text-center text-3xl font-bold text-blue-800" >Hola, ¡Bienvenido a Skolarly!</h1>

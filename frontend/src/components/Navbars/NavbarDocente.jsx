@@ -27,7 +27,7 @@ function SideNavbar({tipo_usuario}) {
         </Disclosure.Button>
         <div className="p-6 w-60 h-screen bg-blue-950 z-20 fixed top-0 -left-60 lg:left-0 lg:w-60  peer-focus:left-0 peer:transition ease-out delay-150 duration-200">
           <div className="flex flex-col justify-start item-center">
-            <Link href={`/${tipo_usuario}`}>
+            <Link href={`/${tipo_usuario}/perfil`}>
               <div className=" text-center w-full">
                 <img className="w-24 mx-auto mb-2" src="/image/skolarly/logo_icon.svg" />
                 <img className="w-24 mx-auto" src="/image/skolarly/logo_text.svg" />
